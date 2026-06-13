@@ -75,7 +75,7 @@ This means that if ACEMAGIC wants your TANK03 to stay as a christmas tree, this 
 
 - Windows
 - ACEMAGIC TANK03 or compatible hardware
-- `inpoutx64` driver available as `\\.\inpoutx64`
+- `inpoutx64` driver available as `\\.\inpoutx64` (included in Windows 11)
 
 Without the low-level driver, the utility cannot access the embedded controller.
 
