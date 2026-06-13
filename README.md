@@ -85,3 +85,11 @@ This is not a generic RGB controller.
 It is specifically made around the behavior observed on the TANK03 and the same EC control path used by the original vendor software.
 
 The utility intentionally stays small and direct. It does not try to be a full hardware management suite, because that is how a simple RGB switch becomes a 400 MB "control center" with three services and a login screen.
+
+## HASHES
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          BFE0E85FC93BFEF4F371A5128253EA28162F7FEAB27BF40DDAF0A420B83B7BC0       C:\Users\sh4\Desktop\CODING\TANKRGB\17\BUILD.BAT
+SHA256          94C046E8C9C02C1573D5669B13CE00A51FE56C2E9E79A6B72113B6C73FE48B94       C:\Users\sh4\Desktop\CODING\TANKRGB\17\TANKRGB.EXE
+SHA256          3F6E38162451B965C0E639E95BBDEC2113B21003C65ED7953F3A4E1470EDFFD5       C:\Users\sh4\Desktop\CODING\TANKRGB\17\TANKRGB.S
