@@ -79,6 +79,30 @@ This means that if ACEMAGIC wants your TANK03 to stay as a christmas tree, this 
 
 Without the low-level driver, the utility cannot access the embedded controller.
 
+## Building
+
+TANK03 RGB Controller is built with LLVM. The included `BUILD.BAT` already contains the complete Windows build pipeline, so on Windows you only need an LLVM installation that provides `clang.exe` and `lld-link.exe`, with both tools available in `PATH`. After that, place `BUILD.BAT` in the same directory as `TANKRGB.S` and run it from a terminal. The script assembles the source as 32-bit x86 code with `clang -target i686-pc-windows-msvc`, then links it directly with `lld-link` as a PE32 Windows GUI executable. No Visual Studio project, Windows SDK resource compiler, CRT, default libraries, .NET runtime, or external build-time dependencies are required, because the program embeds its own imports and manifest directly in the assembly source.
+
+```bat
+@echo off
+setlocal
+clang -target i686-pc-windows-msvc -c TANKRGB.S -o TANKRGB.OBJ
+if errorlevel 1 exit /b 1
+lld-link /subsystem:windows /entry:mainCRTStartup /nodefaultlib /safeseh:no /opt:ref /fixed /out:TANKRGB.EXE TANKRGB.OBJ
+if errorlevel 1 exit /b 1
+for %%F in (TANKRGB.EXE) do echo Built %%~zF bytes: %%F
+endlocal
+```
+
+On Linux, install LLVM and LLD from your distribution package manager, then run the same commands manually from the directory containing `TANKRGB.S`. The output is still a Windows `.EXE`, so Linux is only used as the build host.
+
+```sh
+clang -target i686-pc-windows-msvc -c TANKRGB.S -o TANKRGB.OBJ
+lld-link /subsystem:windows /entry:mainCRTStartup /nodefaultlib /safeseh:no /opt:ref /fixed /out:TANKRGB.EXE TANKRGB.OBJ
+```
+
+At runtime, the only external requirement is the `inpoutx64` driver exposed as `\\.\inpoutx64`, because the utility talks directly to the TANK03 embedded controller to read the hardware mode and apply the selected RGB state.
+
 ## Notes
 
 This is not a generic RGB controller.  
